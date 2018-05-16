@@ -1,0 +1,44 @@
+@charset 'utf-8';
+html {
+  font-size: 100% !important;
+  font-size: 1rem !important;
+  font-size: 14px !important;
+  font-family: "微软雅黑" !important;
+}
+.video-js {
+  width: 100% !important;
+  height: 242px !important;
+}
+.skill .skill_body .video_info .video-player-box .video-js .vjs-big-play-button {
+  top: 50%;
+  left: 50%;
+  margin-left: -2.5rem;
+  margin-top: -1.75rem;
+}
+.visible-xs {
+  display: none !important;
+}
+@media screen and (min-width: 1200px) {
+  .visible-lg {
+    display: block !important;
+  }
+}
+@media screen and (max-width: 992px) and (min-width: 768px) {
+  .hidden-sm {
+    display: none !important;
+  }
+  .visible-lg {
+    display: none !important;
+  }
+}
+@media screen and (max-width: 768px) {
+  .hidden-xs {
+    display: none !important;
+  }
+  .visible-lg {
+    display: none !important;
+  }
+  .visible-xs {
+    display: block !important;
+  }
+}
