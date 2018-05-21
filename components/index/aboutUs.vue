@@ -17,7 +17,7 @@
                         <p>
                             北京盈泰正和生物科技有限公司是一家以互联网+营养的大健康产业为发展起点，集研发、生产、销售的综合性企业。公司在北京、内蒙、哈尔滨等地设立近百人运营销售团队，并在内蒙建立技术研发、生产基地。承载崇尚科学，关爱生命，以人为本，服务大众，至诚至信的秉性理念，改善人类生活品质，实现健康新生活。
                         </p>
-                        <nuxt-link :to="{name:'company_profile'}">
+                        <nuxt-link :to="{name:'companyProfile'}">
                             查看更多 <img src="~assets/img/more.png" alt="">
                         </nuxt-link>
                         

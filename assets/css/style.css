@@ -18,6 +18,62 @@ html {
 .visible-xs {
   display: none !important;
 }
+.nav-pills .nav-link {
+  text-align: center;
+  color: #009ACB;
+}
+.nav-pills .nav-item:nth-child(1) .nav-link {
+  font-size: 1.2rem;
+}
+.nav-pills .nav-link.disabled {
+  font-size: 1.3rem !important;
+  color: #666;
+}
+.card-header {
+  background: #fff;
+}
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+  background-color: #009ACB;
+}
+.col-auto {
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+.tab-content {
+  border: 1px solid #ccc;
+  margin-left: 30px;
+  border-radius: 5px;
+  border-top: 3px solid #009ACB;
+}
+.page-link {
+  color: #009acc;
+}
+.page-item.active .page-link {
+  background-color: #009acc;
+  border-color: #009acc;
+}
+.news_content img {
+  margin: 10px 0;
+  width: 80%;
+}
+.news_content .news_body h2,
+.news_content .news_body h3 {
+  font-size: 1.2rem !important;
+  text-align: center;
+}
+.news_content .news_body p {
+  font-size: 1rem;
+  line-height: 25px;
+  text-indent: 2em;
+  font-size: 14px;
+  margin: 20px 0;
+  color: #444;
+  text-align: left;
+}
+.news_content .news_body .ql-align-center {
+  text-align: center;
+}
 @media screen and (min-width: 1200px) {
   .visible-lg {
     display: block !important;

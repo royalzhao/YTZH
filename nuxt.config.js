@@ -31,11 +31,15 @@ module.exports = {
       { src: '~plugins/nuxt-video-player-plugin.js', ssr: false },
       { src: '~plugins/nuxt-swiper-plugin.js', ssr: false },
       { src: '~plugins/nuxt-velocity-plugin.js', ssr: false },
+      { src: '~plugins/nuxt-social-share-plugin.js', ssr: false },
+      { src: '~plugins/nuxt-amap-plugin.js', ssr: false },
   ],
   css: [
     'video.js/dist/video-js.css',
     'swiper/dist/css/swiper.css',
+    '~node_modules/vue-social-share/dist/client.css',
     '~assets/css/style.css',
+    
     
   ],
 
