@@ -97,4 +97,16 @@ html {
   .visible-xs {
     display: block !important;
   }
+  .card-header {
+    border-bottom: 0 !important;
+  }
+  .tab-content {
+    margin-left: 0;
+  }
+  html {
+    font-size: 100% !important;
+    font-size: 1rem !important;
+    font-size: 12px !important;
+    font-family: "微软雅黑" !important;
+  }
 }

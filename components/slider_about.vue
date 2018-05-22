@@ -63,6 +63,7 @@
 <style scoped>
 .product_show_slider{
     margin-top: 30px;
+    margin-bottom: 30px;
 }
 .product_show_slider .slider_top{
     border-bottom:1px solid #666;

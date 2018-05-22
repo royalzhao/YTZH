@@ -8,7 +8,8 @@
         </div>
 
         <b-container>
-            <div class="product_show_page">
+            <Loading :flag="loadingFlag"></Loading>
+            <div class="product_show_page" v-if="!loadingFlag">
                 <b-row>
                     <b-col lg="9" md="12" sm="12">
                         <div class="bread">
@@ -45,6 +46,7 @@
     import axios from 'axios'
     import sliderNews from '~/components/slider_news.vue'
     import sliderAbout from '~/components/slider_about.vue'
+    import Loading from '~/components/Loading/Loading'
     export default {
         validate ({params}){
             return /^\d+$/.test(params.id)
@@ -74,22 +76,24 @@
                     disabled            : ['google', 'facebook', 'twitter','diandian','in'], // 禁用的站点
                     wechatQrcodeTitle   : '微信扫一扫：分享', // 微信二维码提示文字
                     wechatQrcodeHelper  : '<p>微信里点“发现”，扫一下</p><p>二维码便可将本文分享至朋友圈。</p>',
-                    mobileSites: ['google', 'facebook', 'twitter','diandian','in'],
-                }
+                    mobileSites: ['google', 'facebook', 'twitter','diandian','in']
+                },
+                loadingFlag:true
             }
         },
         components: {
             sliderNews,
             sliderAbout,
+            Loading
         },
         mounted: function () {
-                this.loadingArticles()
+            this.loadingArticles()
         },
         head(){
             return{
-                title:this.title,
+                title:this.$route.params.title,
                 meta:[
-                    {hid:'description',name:'news',content:'This is news page'}
+                    {hid:'description',name:'news',content:this.config.description}
                 ]
             }
         },
@@ -103,6 +107,8 @@
                 }).then(res => {
                     //console.log(res)
                     if (res.status === 200) {
+                        this.loadingFlag = false
+                        
                         this.content = res.data.n_content
                         this.nTitle = res.data.n_title
                         this.from = res.data.n_from

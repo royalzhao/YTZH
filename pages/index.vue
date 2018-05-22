@@ -1,6 +1,5 @@
 <template>
   <div>
-      
       <y-carousel></y-carousel>
       <about-us></about-us>
       <product-show></product-show>

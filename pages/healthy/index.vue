@@ -8,7 +8,8 @@
         </div>
         <b-container>
             <div class="news_center">
-                <div v-for="(item,index) in healthy" :key="index">
+                <Loading :flag="loadingFlag"></Loading>
+                <div v-for="(item,index) in healthy" :key="index" v-if="!loadingFlag">
                     <b-row>
                         <b-col lg="3" md="3" sm="12">
                             <div class="media-img">
@@ -45,6 +46,7 @@
 </template> 
 <script>
 import axios from 'axios'
+import Loading from '~/components/Loading/Loading'
 export default {
     
     data() {
@@ -55,7 +57,7 @@ export default {
             n_type:'healthy',
             key:'bg',
             total:0,
-            
+            loadingFlag: false
         }
     },
     watch:{
@@ -68,6 +70,7 @@ export default {
     },
     methods: {
         loadingArticles () {
+            this.loadingFlag = true
             axios.get('http://www.bjytzh.cn/jxc/showNewsList.thtml', {
                 params: {
                     pageNum: this.pageNum,
@@ -78,6 +81,7 @@ export default {
             }).then(res => {
                 //console.log(res)
                 if (res.status === 200) {
+                    this.loadingFlag = false
                     this.healthy = res.data[0]
                     this.total = res.data[1].count
                     //console.log(this.count)
@@ -86,6 +90,9 @@ export default {
             })
         },
     
+    },
+    components:{
+        Loading
     }
 }
 
@@ -161,7 +168,14 @@ export default {
     border-color:#009acc;
     color: #fff;
 }
-
+@media screen and (max-width: 768px) {
+    .news_center .row{
+        width: 100%;
+    }
+    .news_center .row .media-content{
+        margin-left: 0;
+    }
+}
 
 </style>
         

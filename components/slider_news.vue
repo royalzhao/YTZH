@@ -51,7 +51,7 @@
                         key: this.key,
                     }
                 }).then(res => {
-                    console.log(res)
+                    //console.log(res)
                     if (res.status === 200) {
                         this.news = res.data[0]
                     }
@@ -63,6 +63,7 @@
 <style scoped>
 .product_show_slider{
     margin-top: 30px;
+    
 }
 .product_show_slider .slider_top{
     border-bottom:1px solid #666;
