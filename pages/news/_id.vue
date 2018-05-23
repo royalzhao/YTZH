@@ -8,7 +8,6 @@
         </div>
 
         <b-container>
-            <Loading :flag="loadingFlag"></Loading>
             <div class="product_show_page" v-if="!loadingFlag">
                 <b-row>
                     <b-col lg="9" md="12" sm="12">
@@ -47,24 +46,24 @@
     import sliderNews from '~/components/slider_news.vue'
     import sliderAbout from '~/components/slider_about.vue'
     import Loading from '~/components/Loading/Loading'
+    import Api from '~/utils/api'
     export default {
         validate ({params}){
             return /^\d+$/.test(params.id)
         },
-        // async asyncData( store, route, error,params ){
-        //     let id = route.params.id
-        //     let {data}=await axios.get('http://www.bjytzh.cn/jxc/showNewsById.thtml?n_id='+id)
+        
+        // async asyncData({ params, error }){
+        //     let {data}=await axios.get('http://www.bjytzh.cn/jxc/showNewsById.thtml?n_id='+params.id)
         //     return {article: data}
-        //     this.loadingFlag = false
-        // },
-        asyncData({ params, error }){
-            return axios.get('http://www.bjytzh.cn/jxc/showNewsById.thtml?n_id='+params.id)
-            .then((res)=>{
-                console.log(res.data)
-                return {article:res.data}
-                //console.log(article)
-            })
             
+        // },
+        asyncData ({ params, error }) {
+            return Api.newsOne(params.id)
+                .then((res) => {
+                    return { article: res.data }
+                }).catch (err => {
+                    console.log('newsOne接口报错了啊')
+                })
         },
         data(){
             return{
@@ -98,7 +97,7 @@
             Loading
         },
         created: function () {
-            //  this.loadingArticles()
+            //设置分享页面的一些信息
             this.config.title = this.article.n_title
             this.config.description = this.article.n_abstract
             this.config.image = this.article.n_img
@@ -114,29 +113,6 @@
             }
         },
         methods:{
-           
-            loadingArticles () {
-                axios.get('http://www.bjytzh.cn/jxc/showNewsById.thtml', {
-                    params: {
-                        n_id: this.$route.params.id
-                    }
-                }).then(res => {
-                    //console.log(res)
-                    if (res.status === 200) {
-                        this.loadingFlag = false
-                        
-                        this.content = res.data.n_content
-                        this.nTitle = res.data.n_title
-                        this.from = res.data.n_from
-                        this.time = res.data.n_time
-                        this.config.image = res.data.n_img
-                        this.config.description = res.data.n_abstract
-                        //console.log(this.config)
-                        //console.log(res.data[1].count)
-                    }
-                })
-            },
-            
            
         }
     }

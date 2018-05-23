@@ -2,13 +2,13 @@
     <div>
         
         <div class="product_show_slider">
-            <!-- 侧边栏新闻资讯 -->
+            <!-- 侧边栏肽与健康 -->
             <div class="slider_top">
-                <h3><span></span>新闻资讯</h3>
+                <h3><span></span>肽与健康</h3>
             </div>
             <ul>
                 <Loading :flag="loadingFlag"></Loading>
-                <li v-for="(item,index) in news" :key="index"  v-if="!loadingFlag">
+                <li v-for="(item,index) in heathy" :key="index" v-if="!loadingFlag">
                     <nuxt-link :to="{name:'news-id',params:{id:item.n_id}}">
                         <div class="news_img">
                             <img :src="item.n_img" alt="">
@@ -32,19 +32,19 @@
     export default {
         data() {
             return {
-                news:[],
+                heathy:[],
                 pageNum:1,
                 pageSize:5,
-                n_type:'news',
+                n_type:'healthy',
                 key:'bg',
                 loadingFlag: true
             }
         },
         mounted: function () {
-            this.loadingArticles()
+            this.loadingHealthy()
         },
         methods:{
-            loadingArticles () {
+            loadingHealthy () {
                 axios.get('http://www.bjytzh.cn/jxc/showNewsList.thtml', {
                     params: {
                         pageNum: this.pageNum,
@@ -56,7 +56,7 @@
                     //console.log(res)
                     if (res.status === 200) {
                         this.loadingFlag = false
-                        this.news = res.data[0]
+                        this.heathy = res.data[0]
                     }
                 })
             },

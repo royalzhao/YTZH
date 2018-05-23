@@ -18,40 +18,22 @@
                             <p>
                                 2018年中国保护消费者基金会在全国开展3.15“维护消费者权益，诚信服务满意单位”大型推介活动。经过评审与筛选，北京盈泰正和生物科技有限公司以其优质满意的服务和良好的用户口碑赢得消费者的认同，荣获“重质守信—3·15满意单位”称号，以表彰公司在业界树立行业规范......
                             </p>
-                            <a href="news.html">
+                            <nuxt-link :to="{name:'news-id',params:{id:16,title:'盈泰正和荣膺“重质守信－315满意单位”'}}">
                                 查看更多 <img src="~assets/img/more.png" alt="">
-                            </a>
+                            </nuxt-link>
                         </div>
                         
                     </b-col>
                 </b-row>
                 <b-row>
-                    <b-col  sm="12" md="4" lg="4">
+                    <b-col  sm="12" md="4" lg="4" v-for="(item,index) in news" :key="index">
                         <div class="news_list">
-                            <h3>派普肽大豆蛋白肽荣获“2017中国科技创新最佳发明成果奖”</h3>
+                            <h3>{{item.n_title}}</h3>
                             <hr width="30" style="background-color: #ccc;height: 1px;margin:10px 0;">
                             <p>
-                                2017年9月18日，在第十四届中国科学家论坛上，派普肽(500D)大豆蛋白肽荣获“2017中国科技创新最佳发明成果奖”。此项技术...    <a href="news.html">更多 >></a>
-                            </p>
-                            
-                        </div>
-                    </b-col>
-                    <b-col  sm="12" md="4" lg="4">
-                        <div class="news_list">
-                            <h3>刘新旗博士提升小分子蛋白肽新高度 用科学技术助力营养健康</h3>
-                            <hr width="30" style="background-color: #ccc;height: 1px;margin:10px 0;">
-                            <p>
-                                2017年9月18日，在中国未来研究会、中国高科技产业化研究会、中国技术市场协会和发现杂志社共同主办的第十四届中国科学家论坛上...    <a href="news.html">更多 >></a>
-                            </p>
-                            
-                        </div>
-                    </b-col>
-                    <b-col sm="12" md="4" lg="4">
-                        <div class="news_list">
-                            <h3>卫计委：国民营养计划全方位布局国家营养发展未来</h3>
-                            <hr width="30" style="background-color: #ccc;height: 1px;margin:10px 0;">
-                            <p>
-                                国务院新闻办公室于2017年7月19日上午10时在国务院新闻办新闻发布厅举行新闻发布会，请国家卫生计生委副主任金小桃...    <a href="news.html">更多 >></a>
+                                {{item.n_abstract}}
+                                <nuxt-link :to="{name:'news-id',params:{id:item.n_id,title:item.n_title}}">更多 >></nuxt-link>
+                                
                             </p>
                             
                         </div>
@@ -63,15 +45,40 @@
 </template>
 <script>
     import sectionTitle from '~/components/index/sectionTitle.vue'
+    import axios from 'axios'
     export default {
         data(){
             return{
-
+                news:[],
+                pageNum:1,
+                pageSize:3,
+                n_type:'news',
+                key:'bg',
             }
         },
         components: {
             sectionTitle
         },
+        mounted: function () {
+            this.loadingNews()
+        },
+        methods:{
+            loadingNews () {
+                axios.get('http://www.bjytzh.cn/jxc/showNewsList.thtml', {
+                    params: {
+                        pageNum: this.pageNum,
+                        pageSize: this.pageSize,
+                        n_type: this.n_type,
+                        key: this.key,
+                    }
+                }).then(res => {
+                    //console.log(res)
+                    if (res.status === 200) {
+                        this.news = res.data[0]
+                    }
+                })
+            },
+        }
     }
 </script>
 <style scoped>
@@ -106,6 +113,7 @@
     padding: 20px 15px;
     box-sizing: border-box;
     margin-top: 40px;
+    height: 90%;
 }
 .news .news_body  .news_list h3{
     font-size: 1.3rem;

@@ -32,8 +32,8 @@ export default {
     certificates,
   },
   async asyncData(){
-        
-        
+    let {data}=await axios.post('http://www.bjytzh.cn/jxc/saveOfficialDetail.thtml')
+    return {info: data}
   }
 }
 </script>

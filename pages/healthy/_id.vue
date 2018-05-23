@@ -16,23 +16,23 @@
                             <b-breadcrumb :items="items"/>
                         </div>
                         <div class="news_content">
-                            <h1 id="title">{{nTitle}}</h1>
+                            <h1 id="title">{{article.n_title}}</h1>
                             <div class="title_info">
-                                来源：<span id="from">{{from}}</span>
-                                <span class="time" id="time">{{time}}</span>
+                                来源：<span id="from">{{article.n_from}}</span>
+                                <span class="time" id="time">{{article.n_time}}</span>
                                 <div class="share hidden-xs">
                                     <share :config="config"></share>
                                 </div>
                                 
                             </div>
-                            <div class="news_body" v-html="content">
+                            <div class="news_body" v-html="article.n_content">
         
                             </div>
                         </div>
                         
                     </b-col>
                     <b-col lg="3" class="hidden-sm">
-                            <slider-news></slider-news>
+                            <slider-healthy></slider-healthy>
                         
                             <slider-about></slider-about>
                         
@@ -44,16 +44,25 @@
 </template>
 <script>
     import axios from 'axios'
-    import sliderNews from '~/components/slider_news.vue'
+    import sliderHealthy from '~/components/slider_healthy.vue'
     import sliderAbout from '~/components/slider_about.vue'
     import Loading from '~/components/Loading/Loading'
+    import Api from '~/utils/api'
     export default {
         validate ({params}){
             return /^\d+$/.test(params.id)
         },
+        asyncData ({ params, error }) {
+            return Api.newsOne(params.id)
+                .then((res) => {
+                    return { article: res.data }
+                }).catch (err => {
+                    console.log('newsOne接口报错了啊')
+                })
+        },
         data(){
             return{
-                title:this.$route.params.title,
+                article:'',
                 items: [{
                     text: '首页',
                     to: { name: 'index' }
@@ -69,59 +78,40 @@
                 from:'',
                 time:'',
                 config: {
-                    
-                    title               : this.$route.params.title, // 标题，默认读取 document.title 或者 <meta name="title" content="share.js" />
+                    title               : '', // 标题，默认读取 document.title 或者 <meta name="title" content="share.js" />
                     description         : '', // 描述, 默认读取head标签：<meta name="description" content="PHP弱类型的实现原理分析" />
                     image               : '', // 图片, 默认取网页中第一个img标签
                     disabled            : ['google', 'facebook', 'twitter','diandian','in'], // 禁用的站点
                     wechatQrcodeTitle   : '微信扫一扫：分享', // 微信二维码提示文字
                     wechatQrcodeHelper  : '<p>微信里点“发现”，扫一下</p><p>二维码便可将本文分享至朋友圈。</p>',
-                    mobileSites: ['google', 'facebook', 'twitter','diandian','in']
+                    mobileSites: ['google', 'facebook', 'twitter','diandian','in'],
                 },
-                loadingFlag:true
+                loadingFlag: false
             }
         },
         components: {
-            sliderNews,
+            sliderHealthy,
             sliderAbout,
             Loading
         },
-        mounted: function () {
-            this.loadingArticles()
+        created: function () {
+            //  this.loadingArticles()
+            this.config.title = this.article.n_title
+            this.config.description = this.article.n_abstract
+            this.config.image = this.article.n_img
+            // console.log(this.article.n_title)
+            // console.log(this.config.title)
         },
         head(){
             return{
-                title:this.$route.params.title,
+                title:this.article.n_title,
                 meta:[
-                    {hid:'description',name:'news',content:this.config.description}
+                    {hid:'description',name:'news',content:this.article.n_abstract}
                 ]
             }
         },
         methods:{
-            
-            loadingArticles () {
-                axios.get('http://www.bjytzh.cn/jxc/showNewsById.thtml', {
-                    params: {
-                        n_id: this.$route.params.id
-                    }
-                }).then(res => {
-                    //console.log(res)
-                    if (res.status === 200) {
-                        this.loadingFlag = false
-                        
-                        this.content = res.data.n_content
-                        this.nTitle = res.data.n_title
-                        this.from = res.data.n_from
-                        this.time = res.data.n_time
-                        this.config.image = res.data.n_img
-                        this.config.description = res.data.n_abstract
-                        //console.log(this.count)
-                        //console.log(res.data[1].count)
-                    }
-                })
-            },
-            
-            
+           
         }
     }
 </script>
