@@ -9,7 +9,7 @@
             <ul>
                 <Loading :flag="loadingFlag"></Loading>
                 <li v-for="(item,index) in news" :key="index"  v-if="!loadingFlag">
-                    <nuxt-link :to="{name:'news-id',params:{id:item.n_id}}">
+                    <nuxt-link :to="{name:'news-id',params:{id:item.n_id,title:item.n_title}}">
                         <div class="news_img">
                             <img :src="item.n_img" alt="">
                         </div>

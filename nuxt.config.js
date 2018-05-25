@@ -1,3 +1,4 @@
+const axios = require('axios')
 module.exports = {
   /*
    ** Headers of the page
@@ -81,5 +82,42 @@ module.exports = {
         })
       }
     }
+  },
+  generate: {
+    
+    routes: function () {
+      let data1 = axios.get('http://www.bjytzh.cn/jxc/showNewsList.thtml',{
+        params: {
+          pageNum: 1,
+          pageSize: 100,
+          n_type: 'healthy',
+          key: 'bg'
+        }
+      })
+      .then((res) => {
+        let healthy = res.data[0].map((healthy) => {
+          return '/healthy/' + healthy.n_id
+        })
+       
+        return healthy
+      })      
+
+      let data2 = axios.get('http://www.bjytzh.cn/jxc/showNewsList.thtml',{
+        params: {
+          pageNum: 1,
+          pageSize: 100,
+          n_type: 'news',
+          key: 'bg'
+        }
+      })
+      .then((res) => {
+        return res.data[0].map((news) => {
+          return '/news/' + news.n_id
+        })
+      })
+     
+      return data1
+    }
+    
   }
 }
