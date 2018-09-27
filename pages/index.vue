@@ -1,12 +1,13 @@
 <template>
   <div>
       <y-carousel></y-carousel>
-      <about-us></about-us>
-      <product-show></product-show>
       <general-introduction></general-introduction>
+      <product-show></product-show>
+      
       <technical-expert></technical-expert>
       <news-information></news-information>
       <certificates></certificates>
+      <about-us></about-us>
   </div>
 </template>
 

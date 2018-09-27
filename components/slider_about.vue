@@ -88,7 +88,7 @@
     border-bottom: 1px solid #ccc;
     clear: both;
     overflow: auto;
-    padding-bottom: 15px;
+    padding: 15px 0;
 }
 .product_show_slider ul li:nth-last-of-type(1){
     border-bottom: 0;

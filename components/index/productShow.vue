@@ -90,7 +90,6 @@
 </script>
 <style scoped>
 .productShow{
-    margin: 50px 0;
     background: url('~assets/img/product_bg.jpg');
     padding-bottom: 30px;
 }

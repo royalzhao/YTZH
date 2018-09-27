@@ -116,7 +116,7 @@
 .function_info {
     background: #fff;
     margin: 0px 0 50px 0;
-    padding-bottom: 30px;
+    padding: 30px;
 }
 
 .function_info .function_info_body{

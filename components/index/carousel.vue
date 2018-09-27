@@ -15,7 +15,11 @@
         >
 
             <!-- Text slides with image -->
-            <b-carousel-slide img-src="http://www.bjytzh.cn/img/banner.jpg"
+            <b-carousel-slide img-src="http://www.bjytzh.cn/img/banner3.jpg"
+            ></b-carousel-slide>
+            <b-carousel-slide img-src="http://www.bjytzh.cn/img/banner4.jpg"
+            ></b-carousel-slide>
+            <b-carousel-slide img-src="http://www.bjytzh.cn/img/banner5.jpg"
             ></b-carousel-slide>
 
         </b-carousel>

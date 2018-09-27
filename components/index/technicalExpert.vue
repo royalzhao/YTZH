@@ -117,7 +117,7 @@
 </script>
 <style scoped>
 .skill{
-    background: url('~assets/img/skill_33bg.png');
+    background: url('~assets/img/skill_33bg.jpg');
     margin: 0px 0 50px 0;
     padding-bottom: 30px;
     padding-top: 50px;
